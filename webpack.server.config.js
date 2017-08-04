@@ -1,5 +1,4 @@
-const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
-const ModuleConcatenationPlugin = require( 'webpack' ).optimize.ModuleConcatenationPlugin;
+const webpack = require( 'webpack' );
 
 module.exports = {
    context: __dirname,
@@ -11,10 +10,11 @@ module.exports = {
       libraryTarget: 'commonjs'
    },
    target: 'node',
+   devtool: 'sourcemap',
    externals: [
       'react',
-      'react-dom',
-      'react-pdf'
+      'react-dom/server'
+      //'react-pdf/build/react-pdf'
    ],
    module: {
       rules: [
@@ -25,15 +25,15 @@ module.exports = {
          },
          {
             test: /\.scss$/,
-            use: ExtractTextPlugin.extract({
-               use: [ 'css-loader', 'sass-loader?precision=10' ],
-               fallback: [ 'style-loader' ]
-            })
+            use: [ 'css-loader/locals', 'sass-loader?precision=10' ],
          }
       ]
    },
    plugins: [
-      new ExtractTextPlugin( 'style.css' ),
-      new ModuleConcatenationPlugin()
+      new webpack.DefinePlugin( {
+         File: function File() { throw new Error( 'File() not implemented' ); },
+         Blob: function Blob() { throw new Error( 'Blob() not implemented' ); }
+      } ),
+      new webpack.optimize.ModuleConcatenationPlugin()
    ]
 };

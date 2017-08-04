@@ -12,6 +12,7 @@ module.exports = {
    },
    devtool: 'sourcemap',
    module: {
+      noParse: /\/pdfjs-dist\/build\/pdf\.js$/,
       rules: [
          {
             test: /\.js$/,
@@ -31,20 +32,18 @@ module.exports = {
       new ExtractTextPlugin( 'style.css' ),
       new FlowBabelWebpackPlugin(),
       new ModuleConcatenationPlugin(),
-      //new SsrPlugin( __dirname + '/dist/server.js', {} )
+      new SsrPlugin( __dirname + '/dist/server.js', {} )
    ],
    devServer: {
       setup: function( app, server ) {
-         //const plugin = module.exports.plugins[3];
-         //const fs = server.middleware.fileSystem;
-         //console.log( fs );
-         //app.use( plugin.app( fs ) );
-         app.use( require( './server' )() );
+         const plugin = module.exports.plugins[3];
+         const fs = server.middleware.fileSystem;
+         app.use( plugin.app( fs ) );
       }
    }
 };
 
-function SsrPlugin( path, options ) {
+function SsrPlugin( filename, options ) {
    let app;
 
    return {
@@ -53,14 +52,27 @@ function SsrPlugin( path, options ) {
          compiler.plugin( 'invalid', invalid );
       },
       app: function( fs ) {
+         const vm = require( 'vm' );
+         const path = require( 'path' );
+         require( 'source-map-support' ).install();
          return function( req, res, next ) {
             if( !app ) {
-               const source = fs.readFileSync( path );
+               const source = fs.readFileSync( filename );
                const exports = {};
                const module = { exports: exports };
-               const fn = new Function( 'self', 'this', 'require', 'module', 'exports', 'File', 'Blob', source );
-               fn( undefined, undefined, require, module, exports, notImplemented, notImplemented );
-               app = module.exports.default || module.exports;
+               const sandbox = Object.assign( Object.create( global ), {
+                  exports: exports,
+                  require: require,
+                  module: module,
+                  __filename: filename,
+                  dirname: path.dirname( filename )
+               } );
+               const script = new vm.Script( source, { filename: filename } );
+               const context = vm.createContext( sandbox );
+
+               script.runInContext( context );
+               app = ( exports.default || module.exports )( options );
+               console.log( 'update app' );
             }
             app( req, res, next );
          }
@@ -69,9 +81,5 @@ function SsrPlugin( path, options ) {
 
    function invalid() {
       app = null;
-   }
-
-   function notImplemented() {
-      throw new Error( 'Function not implemented' );
    }
 }
