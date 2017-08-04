@@ -1,0 +1,15 @@
+:local(.App) {
+   margin: 4em;
+
+   .grid {
+      margin: auto;
+      display: table;
+      max-width: 80%;
+   }
+
+   .doc {
+      display: inline-block;
+      width: 200px;
+      position: relative;
+   }
+}
