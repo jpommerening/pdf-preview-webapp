@@ -65,6 +65,7 @@ if( process.env.NODE_ENV !== 'production' ) {
             script.runInContext( context );
 
             resolve( ( exports.default || module.exports )( {
+               contentBase: __dirname,
                scripts: scripts,
                styles: styles
             } ) );
@@ -74,7 +75,7 @@ if( process.env.NODE_ENV !== 'production' ) {
 }
 else {
    app.use( publicPath, express.static( __dirname + publicPath ) );
-   app.use( require( '.' ) );
+   app.use( require( '.' )() );
 }
 
 app.use( express.static( __dirname ) ); // testing
@@ -82,5 +83,5 @@ app.use( express.static( __dirname ) ); // testing
 module.exports = app;
 
 if( require.main === module ) {
-   app.listen( process.env.PORT || 0 );
+   app.listen( process.env.PORT || 8000 );
 }
