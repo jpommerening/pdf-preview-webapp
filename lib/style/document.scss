@@ -2,25 +2,29 @@
 
 :local(.Document) {
    display: inline-block;
-   border: 0;
-   padding: 0;
-   margin: 1em;
    position: relative;
    overflow: hidden;
 
-   &.loaded {
-      @include drop-shadow;
-   }
+   margin: 1em;
 
-   &.loading {
-      width: 180px;
-      height: 240px;
-      border: $placeholder-border;
-      padding: #{ -1 * $placeholder-border-width };
-   }
+   width: 180px;
+   height: 240px;
+   border: $placeholder-border;
+   padding: #{ -1 * $placeholder-border-width };
+
+   transition: .3s box-shadow ease-out;
 
    canvas {
       display: block;
+   }
+
+   &.loaded {
+      @include drop-shadow;
+
+      width: inherit;
+      height: inherit;
+      border: none;
+      padding: 0;
    }
 
    :local(.Overlay) {
