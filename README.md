@@ -1,8 +1,8 @@
 # pdf-preview-webapp
 
-> 📄🔍 a small web application for previewing PDFs
+📄🔍 a small web application for previewing PDFs
 
-![](docs/screenshot.jpg)
+[![early screenshot](docs/screenshot.png)](docs/screenshot.jpg)
 
 ## Usage
 
