@@ -1,0 +1,17 @@
+$placeholder-border-color: #ccc;
+$placeholder-border-width: 2px;
+
+$placeholder-border: $placeholder-border-width dashed $placeholder-border-color;
+
+$spinner-border-color: $placeholder-border-color;
+$spinner-border-width: $placeholder-border-width;
+$spinner-rpm: 60;
+$spinner-diameter: 32px;
+
+@mixin drop-shadow( $type: box-shadow, $size: 1em ) {
+   $spread: .3;
+   #{$type}:
+      #{ -1 * $spread * $size } #{ .5 * $size } $size rgba(40, 0, 0, .1),
+      #{ $spread * $size } #{ .5 * $size } $size rgba(0, 40, 0, .1),
+      0 #{ .5 * $size } $size rgba(0, 0, 0, .1);
+}

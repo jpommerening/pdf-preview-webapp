@@ -1,5 +1,5 @@
+const webpack = require( 'webpack' );
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
-const ModuleConcatenationPlugin = require( 'webpack' ).optimize.ModuleConcatenationPlugin;
 
 module.exports = {
    context: __dirname,
@@ -11,6 +11,9 @@ module.exports = {
       publicPath: 'dist/'
    },
    devtool: 'sourcemap',
+   node: {
+      process: true
+   },
    module: {
       noParse: /\/pdfjs-dist\/build\/pdf\.js$/,
       rules: [
@@ -30,6 +33,9 @@ module.exports = {
    },
    plugins: [
       new ExtractTextPlugin( 'style.css' ),
-      new ModuleConcatenationPlugin()
+      new webpack.DefinePlugin( {
+         process: { env: {} }
+      } ),
+      new webpack.optimize.ModuleConcatenationPlugin()
    ]
 };

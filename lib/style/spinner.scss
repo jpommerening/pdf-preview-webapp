@@ -1,0 +1,65 @@
+@import './variables';
+
+:local(.Spinner) {
+   $border-color: $spinner-border-color;
+   $border-width: $spinner-border-width;
+   $n-margin: #{ -1 * $border-width };
+
+   $animation-duration: 60s / $spinner-rpm;
+
+   width: $spinner-diameter;
+   height: $spinner-diameter;
+   padding: 0;
+
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+
+   &:after, &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      border-style: none;
+      border-color: $border-color;
+      border-width: $border-width;
+
+      animation-duration: $animation-duration;
+      animation-iteration-count: infinite;
+      animation-name: spin;
+   }
+
+   &:before {
+      top: 0;
+      left: 0;
+      border-radius: 100% 0 0 0;
+      transform-origin: 100% 100%;
+      border-top-style: solid;
+      border-left-style: solid;
+      margin: $n-margin 0 0 $n-margin;
+      animation-delay: #{ -0.3 * $animation-duration };
+   }
+
+   &:after {
+      top: 0;
+      right: 0;
+      border-radius: 0 100% 0 0;
+      transform-origin: 0 100%;
+      border-top-style: solid;
+      border-right-style: solid;
+      margin: $n-margin $n-margin 0 0;
+   }
+
+   @keyframes spin {
+      from {
+         transform: rotate(0);
+      }
+
+      to {
+         transform: rotate(360deg);
+      }
+   }
+}
+
