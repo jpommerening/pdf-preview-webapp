@@ -2,6 +2,7 @@ const webpack = require( 'webpack' );
 
 module.exports = {
    context: __dirname,
+   name: 'server',
    entry: { server: './lib/server' },
    output: {
       filename: '[name].js',
