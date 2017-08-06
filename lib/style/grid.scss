@@ -1,0 +1,15 @@
+:local(.Grid) {
+   margin: 0;
+   padding: 0;
+}
+
+ul:local(.Grid),
+ol:local(.Grid) {
+   display: table;
+   list-style: none;
+}
+
+li:local(.Grid) {
+   display: inline-block;
+   vertical-align: bottom;
+}

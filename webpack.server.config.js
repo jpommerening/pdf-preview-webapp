@@ -14,6 +14,7 @@ module.exports = {
    target: 'node',
    devtool: 'sourcemap',
    externals: [
+      'express',
       'react',
       'react-dom/server',
       //'react-pdf/build/react-pdf'
