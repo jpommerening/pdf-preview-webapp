@@ -1,5 +1,11 @@
 {
-  "presets": [ "es2015" ],
-  "plugins": [ "transform-class-properties", "transform-object-rest-spread", "transform-flow-comments", "babel-plugin-transform-react-jsx" ],
-  "sourceMap": "inline"
+   "presets": [ [ "es2015", { "modules": false } ] ],
+   "plugins": [
+      "transform-class-properties",
+      "transform-object-rest-spread",
+      "transform-flow-comments",
+      "babel-plugin-transform-react-jsx",
+      "react-hot-loader/babel"
+   ],
+   "sourceMap": "inline"
 }
