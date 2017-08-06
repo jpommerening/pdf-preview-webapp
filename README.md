@@ -25,7 +25,7 @@ const express = require( 'express' );
 const previewApp = require( 'pdf-preview-webapp' );
 
 const app = express();
-app.use( '/preview', app );
+app.use( '/preview', previewApp );
 ```
 
 To start a `webpack-dev-server` instance running the application (including server side rendering) use `yarn dev`. This requires `devDependencies` to be installed:
