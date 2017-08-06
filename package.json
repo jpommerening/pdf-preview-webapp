@@ -5,7 +5,8 @@
   "author": "Jonas Pommerening <jonas.pommerening@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "prepublish": "webpack -p"
+    "prepublish": "webpack -p",
+    "dev": "webpack-dev-server"
   },
   "dependencies": {
     "express": "^4.15.3",
@@ -33,6 +34,6 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "webpack": "^3.4.1",
-    "webpack-dev-middleware": "^1.12.0"
+    "webpack-dev-server": "^2.6.1"
   }
 }

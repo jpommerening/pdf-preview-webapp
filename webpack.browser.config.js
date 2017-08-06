@@ -12,9 +12,6 @@ module.exports = {
       publicPath: 'dist/'
    },
    devtool: 'sourcemap',
-   node: {
-      process: true
-   },
    module: {
       noParse: /\/pdfjs-dist\/build\/pdf\.js$/,
       rules: [
@@ -25,10 +22,10 @@ module.exports = {
          },
          {
             test: /\.scss$/,
-            use: ExtractTextPlugin.extract({
+            use: ExtractTextPlugin.extract( {
                use: [ 'css-loader', 'sass-loader' ],
                fallback: [ 'style-loader' ]
-            })
+            } )
          }
       ]
    },

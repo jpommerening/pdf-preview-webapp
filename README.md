@@ -8,9 +8,9 @@
 
 The repository covers multiple integration scenarios. It can be used as a standalone server, but it also exports an express/connect compatible middleware.
 
-The standalone server is a simple [express.js][express] app. You can start it by running the `server.js` script (for example via `npm start`).
-You should `export NODE_ENV=production` unless you wish to start the server with [webpack][] support for on-the-fly recompilation of the sources.
+The standalone server is a simple [express.js][express] app. You can start it by running the `server.js` script (for example via `yarn start`).
 The server listens on port 8000 by default, but this can be changed by setting the `PORT` environment variable.
+In this case you do not need the `devDependencies` which `yarn install` helpfully ignores when exporting `NODE_ENV=production`.
 
 ```console
 $ export NODE_ENV=production PORT=8099
@@ -28,6 +28,13 @@ const app = express();
 app.use( '/preview', app );
 ```
 
+To start a `webpack-dev-server` instance running the application (including server side rendering) use `yarn dev`. This requires `devDependencies` to be installed:
+
+```console
+$ export NODE_ENV=
+$ yarn install
+$ yarn dev
+```
 
 ## What's what
 
