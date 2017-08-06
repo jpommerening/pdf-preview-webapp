@@ -1,4 +1,5 @@
 const webpack = require( 'webpack' );
+const FlowBabelWebpackPlugin = require( 'flow-babel-webpack-plugin' );
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 
 module.exports = {
@@ -32,10 +33,11 @@ module.exports = {
       ]
    },
    plugins: [
-      new ExtractTextPlugin( 'style.css' ),
+      new FlowBabelWebpackPlugin(),
       new webpack.DefinePlugin( {
          process: { env: {} }
       } ),
+      new ExtractTextPlugin( 'style.css' ),
       new webpack.optimize.ModuleConcatenationPlugin()
    ]
 };

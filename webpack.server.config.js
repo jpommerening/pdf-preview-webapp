@@ -1,4 +1,5 @@
 const webpack = require( 'webpack' );
+const FlowBabelWebpackPlugin = require( 'flow-babel-webpack-plugin' );
 
 module.exports = {
    context: __dirname,
@@ -31,6 +32,7 @@ module.exports = {
       ]
    },
    plugins: [
+      new FlowBabelWebpackPlugin(),
       new webpack.DefinePlugin( {
          File: function File() { throw new Error( 'File() not implemented' ); },
          Blob: function Blob() { throw new Error( 'Blob() not implemented' ); }

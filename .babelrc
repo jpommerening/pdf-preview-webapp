@@ -1,5 +1,5 @@
 {
-  "presets": [ "flow", "react", "es2015" ],
-  "plugins": [ "transform-class-properties", "transform-object-rest-spread" ],
+  "presets": [ "es2015" ],
+  "plugins": [ "transform-class-properties", "transform-object-rest-spread", "transform-flow-comments", "babel-plugin-transform-react-jsx" ],
   "sourceMap": "inline"
 }
