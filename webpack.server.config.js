@@ -17,6 +17,8 @@ module.exports = {
       'express',
       'react',
       'react-dom/server',
+      'sockjs',
+      'sockjs-client'
       //'react-pdf/build/react-pdf'
    ],
    module: {

@@ -1,5 +1,8 @@
 const vm = require( 'vm' );
 
+const PROPS = {};
+const STATE = {};
+
 module.exports = {
    serverSideRender: true,
    setup: ( app, server ) => {
@@ -53,7 +56,13 @@ function load( cache, middleware, stats ) {
          resolve( ( exports.default || module.exports )( {
             contentBase: __dirname,
             scripts: scripts,
-            styles: styles
+            styles: styles,
+            assets: [
+               ...assets[ 0 ],
+               ...assets[ 1 ]
+            ],
+            props: PROPS,
+            state: STATE
          } ) );
       } );
    } );
