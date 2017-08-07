@@ -33,6 +33,21 @@
       transition: .3s transform ease-in-out;
    }
 
+   .info {
+      position: absolute;
+      color: #aaa;
+
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+   }
+
+   .spinner {
+      height: 50px;
+   }
+   .message {
+   }
+
    &.details {
       .main { transform: translate(#{ -.5 * $sidebar-width }, 0); }
       .sidebar { transform: translate(0, 0); }
