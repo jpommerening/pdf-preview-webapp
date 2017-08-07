@@ -12,10 +12,17 @@ The available entpoints are documented below.
 {
    "_links": {
       "self": { "href": "/api" },
-      "resources": { "href": "/api/resources" }
+      "resources": { "href": "/api/resources" },
+      "events": { "href": "/api/events" }
    }
 }
 ```
+
+## `/api/events`
+
+`GET /api/events`
+
+([SockJS](https://sockjs.org/) endpoint for updates)
 
 ## `/api/resources`
 
