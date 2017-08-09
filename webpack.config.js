@@ -17,7 +17,6 @@ module.exports[ 0 ].plugins.push( {
             entry.browser.unshift( 'react-hot-loader/patch' );
             module.exports[ 0 ].plugins.forEach( p => {
                if( p instanceof ExtractTextPlugin ) {
-                  console.log( 'disable etp' );
                   p.options.disable = true;
                }
             } );
