@@ -1,4 +1,5 @@
 const vm = require( 'vm' );
+const optionsFromStats = require( '.' ).optionsFromStats;
 
 const PROPS = {};
 const STATE = {};
@@ -23,17 +24,11 @@ module.exports = {
 function load( cache, middleware, stats ) {
    const hash = stats.hash;
    return cache[ hash ] = cache[ hash ] || new Promise( ( resolve, reject ) => {
-      const assets = stats.children.map( child => {
-         return child.assets
-            .map( asset => child.publicPath + asset.name );
-      } );
-
-      const scripts = assets[ 0 ].filter( path => ( /\.js$/.test( path ) && !/worker\.js$/.test( path ) ) );
-      const styles = assets[ 0 ].filter( path => ( /\.css$/.test( path ) ) );
-      const server = assets[ 1 ].filter( path => ( /\.js$/.test( path ) ) );
+      const browser = optionsFromStats( stats.children[ 0 ] );
+      const server = optionsFromStats( stats.children[ 1 ] );
 
       const fs = middleware.fileSystem;
-      const filename = middleware.getFilenameFromUrl( server[ 0 ] );
+      const filename = middleware.getFilenameFromUrl( server.scripts[ 0 ] );
 
       fs.readFile( filename, ( err, source ) => {
          if( err ) {
@@ -53,17 +48,13 @@ function load( cache, middleware, stats ) {
 
          script.runInContext( context );
 
-         resolve( ( exports.default || module.exports )( {
+         const options = Object.assign( {
             contentBase: __dirname,
-            scripts: scripts,
-            styles: styles,
-            assets: [
-               ...assets[ 0 ],
-               ...assets[ 1 ]
-            ],
             props: PROPS,
             state: STATE
-         } ) );
+         }, browser );
+
+         resolve( ( exports.default || module.exports )( options ) );
       } );
    } );
 }

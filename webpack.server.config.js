@@ -35,11 +35,11 @@ module.exports = {
       ]
    },
    plugins: [
-      new FlowBabelWebpackPlugin(),
       new webpack.DefinePlugin( {
          File: function File() { throw new Error( 'File() not implemented' ); },
          Blob: function Blob() { throw new Error( 'Blob() not implemented' ); }
       } ),
-      new webpack.optimize.ModuleConcatenationPlugin()
+      new webpack.optimize.ModuleConcatenationPlugin(),
+      new FlowBabelWebpackPlugin()
    ]
 };

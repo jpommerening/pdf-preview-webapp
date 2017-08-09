@@ -14,7 +14,8 @@
     "react-dom": "^15.6.1",
     "react-pdf": "^1.8.3",
     "sockjs": "^0.3.18",
-    "sockjs-client": "^1.1.4"
+    "sockjs-client": "^1.1.4",
+    "stats-webpack-plugin": "^0.6.1"
   },
   "devDependencies": {
     "babel": "^6.23.0",
