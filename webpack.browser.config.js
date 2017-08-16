@@ -25,9 +25,18 @@ module.exports = {
             test: /\.scss$/,
             use: ExtractTextPlugin.extract( {
                use: [ 'css-loader', 'sass-loader' ],
-               fallback: [ 'style-loader' ]
+               fallback: [ 'style-loader' ],
+               publicPath: ''
             } )
-         }
+         },
+         {
+            test: /\.(gif|jpe?g|png|eot|svg|ttf|woff2?)(\?.*)?$/,
+            use: [ 'file-loader?name=[hash:hex:20].[name].[ext]' ]
+         },
+         {
+            test: /\.(eot|ttf|woff2?)(\?.*)?$/,
+            use: [ 'icon-loader' ]
+         },
       ]
    },
    plugins: [

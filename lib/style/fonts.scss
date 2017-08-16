@@ -1,0 +1,32 @@
+@import '~font-awesome/scss/_variables.scss';
+
+$icons: (
+  file-o: $fa-var-file-o,
+  file-code-o: $fa-var-file-code-o,
+  file-pdf-o: $fa-var-file-pdf-o
+);
+
+$glyphs: '';
+@each $name, $code-point in $icons {
+  $glyphs: '#{$glyphs}#{unquote($code-point)}';
+
+  .#{$fa-css-prefix}-#{$name}:before {
+    content: $code-point;
+  }
+}
+
+$fa-font-path: '~font-awesome/fonts';
+$fa-font-query: 'v=#{$fa-version}&glyphs=#{$glyphs}';
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('#{$fa-font-path}/fontawesome-webfont.eot?#{$fa-font-query}');
+  src: url('#{$fa-font-path}/fontawesome-webfont.eot?#{$fa-font-query}') format('embedded-opentype'),
+    url('#{$fa-font-path}/fontawesome-webfont.woff?#{$fa-font-query}') format('woff'),
+    url('#{$fa-font-path}/fontawesome-webfont.ttf?#{$fa-font-query}') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import '~font-awesome/scss/_mixins.scss';
+@import '~font-awesome/scss/_core.scss';

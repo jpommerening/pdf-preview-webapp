@@ -1,6 +1,6 @@
 @import './variables';
 
-:local(.Document) {
+:local(.Preview) {
    display: inline-block;
    position: relative;
    overflow: hidden;
@@ -44,6 +44,20 @@
       transition: transform .3s ease-out, opacity .3s ease-out;
       transform: translate(0, 40px);
       opacity: 0;
+
+      .name {
+         font-weight: bolder;
+      }
+
+      a {
+         color: #ffeeea;
+         &:hover {
+            color: #fff;
+         }
+         &:visited, &:active {
+            color: inherit;
+         }
+      }
    }
 
    &:hover :local(.Overlay) {
