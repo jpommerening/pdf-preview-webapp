@@ -36,25 +36,35 @@ function load( cache, middleware, stats ) {
             return;
          }
 
-         const exports = {};
-         const module = { exports: exports };
-         const sandbox = Object.assign( Object.create( global ), {
-            exports: exports,
-            require: require,
-            module: module
-         } );
-         const script = new vm.Script( source, { filename: filename } );
-         const context = vm.createContext( sandbox );
+         try {
+            const exports = exec( source, filename );
+            const options = Object.assign( {
+               contentBase: __dirname,
+               props: PROPS,
+               state: STATE
+            }, browser );
 
-         script.runInContext( context );
-
-         const options = Object.assign( {
-            contentBase: __dirname,
-            props: PROPS,
-            state: STATE
-         }, browser );
-
-         resolve( ( exports.default || module.exports )( options ) );
+            resolve( exports( options ) );
+         }
+         catch( err ) {
+            reject( err );
+         }
       } );
    } );
+}
+
+function exec( source, filename ) {
+   const exports = {};
+   const module = { exports: exports };
+   const sandbox = Object.assign( Object.create( global ), {
+      exports: exports,
+      require: require,
+      module: module
+   } );
+   const script = new vm.Script( source, { filename: filename } );
+   const context = vm.createContext( sandbox );
+
+   script.runInContext( context );
+
+   return ( exports.default || module.exports );
 }

@@ -1,9 +1,10 @@
-$placeholder-border-color: #ccc;
-$placeholder-border-width: 2px;
+$placeholder-color: #ccc;
 
+$placeholder-border-color: $placeholder-color;
+$placeholder-border-width: 2px;
 $placeholder-border: $placeholder-border-width dashed $placeholder-border-color;
 
-$spinner-border-color: $placeholder-border-color;
+$spinner-border-color: $placeholder-color;
 $spinner-border-width: $placeholder-border-width;
 $spinner-rpm: 60;
 $spinner-diameter: 32px;

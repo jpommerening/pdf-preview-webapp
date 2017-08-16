@@ -1,0 +1,25 @@
+@import './variables';
+
+:local(.Placeholder) {
+   display: inline-block;
+   position: relative;
+   overflow: hidden;
+
+   margin: 1em;
+
+   width: 180px;
+   height: 240px;
+   border: $placeholder-border;
+   padding: #{ -1 * $placeholder-border-width };
+   color: $placeholder-color;
+
+   :local(.Message) {
+      position: absolute;
+      text-align: center;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: 0;
+      padding: .5em;
+   }
+}
