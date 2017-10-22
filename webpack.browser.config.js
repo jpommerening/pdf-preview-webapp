@@ -22,7 +22,7 @@ module.exports = {
             use: [ 'babel-loader' ]
          },
          {
-            test: /\.scss$/,
+            test: /\.s?css$/,
             use: ExtractTextPlugin.extract( {
                use: [ 'css-loader', 'sass-loader' ],
                fallback: [ 'style-loader' ],

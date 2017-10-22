@@ -29,7 +29,7 @@ module.exports = {
             use: [ 'babel-loader' ]
          },
          {
-            test: /\.scss$/,
+            test: /\.s?css$/,
             use: [ 'css-loader/locals', 'sass-loader?precision=10' ],
          }
       ]
