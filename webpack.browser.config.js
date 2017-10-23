@@ -1,7 +1,7 @@
 const webpack = require( 'webpack' );
 const FlowBabelWebpackPlugin = require( 'flow-babel-webpack-plugin' );
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
-const StatsPlugin = require( 'stats-webpack-plugin' );
+const StatsWriterPlugin = require( 'webpack-stats-plugin' ).StatsWriterPlugin;
 
 module.exports = {
    context: __dirname,
@@ -46,11 +46,12 @@ module.exports = {
       new ExtractTextPlugin( 'style.css' ),
       new webpack.optimize.ModuleConcatenationPlugin(),
       new FlowBabelWebpackPlugin(),
-      new StatsPlugin( 'stats.json', {
-         modules: false,
-         reasons: false,
-         chunks: false,
-         children: false
+      new StatsWriterPlugin( {
+         filename: 'stats.json',
+         fields: [
+            'publicPath',
+            'assets'
+         ]
       } )
    ]
 };

@@ -44,6 +44,7 @@ The `dist` directory contains the files that make up the actual application.
 - `browser.js` the actual web application that runs in your browser, including dependencies
 - `style.css` CSS for the web application
 - `*.worker.js` the source file for the web worker that renders PDF files
+- `stats.json` a manifest of files created when building the web application; used by the server
 
 ## Options
 

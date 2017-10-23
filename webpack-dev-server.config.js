@@ -6,7 +6,7 @@ const STATE = {};
 
 module.exports = {
    serverSideRender: true,
-   setup: ( app, server ) => {
+   before: ( app, server ) => {
       const middleware = server.middleware;
       const cache = {};
 
